@@ -1,0 +1,34 @@
+[build-system]
+requires = [
+  "setuptools ~= 68.2",
+  "wheel ~= 0.41.2",
+  "setuptools-pipfile ~= 0.7.0",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sueldo_analytics"
+description = "Data Analytics regarding Argentinian economy"
+requires-python = ">=3.11"
+license = { file = "LICENSE.txt" }
+keywords = ["analytics", "data", "argentina"]
+authors = [
+  { name = "Juan José Farina", email = "juanjosefarina.jjf@gmail.com" },
+]
+dynamic = ['version', 'readme']
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+]
+
+[project.scripts]
+sueldo_analytics = "sueldo_analytics.__main__:app"
+
+[tool.setuptools.package-data]
+"*" = ["py.typed", "*.md"]
+
+[tool.setuptools.dynamic]
+version = { attr = "git_stats_report.__version__" }
+readme = { file = ["README.md"], content-type = "text/markdown" }
+
+[tool.setuptools-pipfile]

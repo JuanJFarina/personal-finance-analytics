@@ -1,0 +1,21 @@
+año,destino,precio_en_ars
+
+https://eleconomista.com.ar/actualidad/los-pasajes-avion-argentina-subieron-17500-ultimos-5-anos-n71277
+2019, arg-eeuu,   31800
+2024, arg-eeuu, 1086600
+
+https://www.lanacion.com.ar/economia/cielos-abiertos-el-gobierno-habilito-latam-volar-nid2281601/
+2018, arg-eeuu, 24000
+2019, arg-eeuu, 18000
+
+https://www.lanacion.com.ar/economia/crecio-la-venta-de-vuelos-a-estados-unidos-para-octubre-previo-a-la-entrada-en-vigencia-de-las-nid24092021/
+2021, arg-eeuu, 130000
+
+https://www.lanacion.com.ar/economia/ofertas-del-travel-sale-cuotas-sin-interes-y-hasta-70000-de-descuentos-en-viajes-nid23082022/
+2022, arg-eeuu, 147742
+
+https://www.lanacion.com.ar/economia/cyber-monday-cuales-son-los-vuelos-y-paquetes-mas-baratos-que-se-pueden-encontrar-en-el-festival-de-nid06112023/
+2023, arg-eeuu, 413000
+
+https://www.lanacion.com.ar/economia/cuales-son-las-promociones-aereas-del-travel-sale-2024-nid26082024/
+2024, arg-eeuu, 769163

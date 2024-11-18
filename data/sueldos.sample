@@ -1,0 +1,14 @@
+año,mes,sueldo_bruto_ars,sueldo_neto_ars,inflacion_del_mes_anterior,empresa,puesto,seniority,dolar_oficial,dolar_blue
+2023,11,400000.00,320000.00,8.30,TechCorp,DataEngineer,Junior,365.50,915.00
+2023,12,400000.00,330000.00,12.80,TechCorp,DataEngineer,Junior,376.50,955.00
+2024,1,450000.00,370000.00,25.50,TechCorp,DataEngineer,Junior,830.25,1005.00
+2024,2,500000.00,410000.00,20.60,TechCorp,DataEngineer,Junior,846.00,1195.00
+2024,3,500000.00,410000.00,13.20,TechCorp,DataEngineer,Junior,861.50,1195.00
+2024,4,650000.00,520000.00,11.00,TechCorp,DataEngineer,Junior,880.00,1005.00
+2024,5,650000.00,520000.00,8.80,TechCorp,DataEngineer,Junior,897.00,1040.00
+2024,6,800000.00,640000.00,4.20,TechCorp,DataEngineer,Junior,916.00,1235.00
+2024,7,800000.00,630000.00,4.60,TechCorp,DataEngineer,Junior,932.50,1405.00
+2024,8,950000.00,760000.00,4.00,TechCorp,DataEngineer,Mid,951.50,1380.00
+2024,9,950000.00,750000.00,4.20,TechCorp,DataEngineer,Mid,973.00,1305.00
+2024,10,950000.00,750000.00,3.50,TechCorp,DataEngineer,Mid,990.50,1220.00
+2024,11,1050000.00,850000.00,2.70,TechCorp,DataEngineer,Mid,1013.00,1190.00

@@ -1,0 +1,135 @@
+fecha,ars_promedio
+
+https://panoramaregistral.com.ar/autos-subieron-los-precios-54-en-el-ano-y-resurgen-oportunidades-atadas-a-la-brecha/
+"para 2024-07 los autos subieron un 54% en el año"
+
+https://www.infobae.com/autos/2024/09/12/marca-por-marca-cuanto-aumentaron-en-el-ultimo-ano-los-10-autos-mas-baratos-del-mercado/ (tomando el más caro)
+2023-09,12936000
+2024-09,36472000
+
+https://www.lanacion.com.ar/autos/asi-quedo-la-lista-de-los-10-autos-mas-baratos-en-noviembre-nid15112023/
+2023-11,10335000
+
+https://www.eldiarioar.com/autos-transporte-y-movilidad/precios-autos-disparan-pesos-dolares-blue_1_10783907.html (tomando promedios)
+2023-12,20598737
+
+https://cdn.motor1.com/images/mgl/eoRVeW/s1/inflacion-informe-dagger-1.webp (tomando promedios)
+2023-11,28199970
+2023-12,33899940
+2024-01,39000000
+
+https://www.lanacion.com.ar/autos/estos-son-los-autos-mas-baratos-tras-la-devaluacion-como-quedo-el-ranking-nid20122023/
+2023-12,14567400
+
+https://cdn.motor1.com/images/custom/thumbnail/nissan-precios-marzo-2024-2.jpg (tomando el más barato)
+2024-02,33705300
+2024-03,33705300
+
+https://www.lanacion.com.ar/autos/impuesto-al-lujo-tras-la-actualizacion-aparecieron-los-primeros-precios-de-los-autos-nid26012024/ (tomando el promedio)
+2024-01,17687850
+
+https://www.lanacion.com.ar/autos/estos-son-los-10-autos-mas-baratos-en-febrero-2024-nid03022024/
+2024-02,18774000
+
+https://www.lanacion.com.ar/autos/apenas-quedan-tres-autos-0km-por-debajo-de-los-20-millones-nid08032024/
+2024-03,22430000
+
+https://eleconomista.com.ar/autos/los-0-km-rubro-mas-aumento-sus-precios-muy-encima-inflacion-salarios-n72481 (único dato)
+2024-04,19864000
+
+https://www.lanacion.com.ar/autos/estos-son-los-10-autos-mas-baratos-en-abril-2024-nid09042024/
+2024-04,23033900
+
+https://www.lanacion.com.ar/autos/asi-quedo-el-ranking-de-autos-mas-baratos-en-mayo-2024-nid10052024/
+2024-05,23033900
+
+https://www.lanacion.com.ar/autos/estos-son-los-10-autos-mas-baratos-en-junio-2024-nid12062024/
+2024-06,23521100
+
+https://eleconomista.com.ar/autos/cuales-son-autos-0km-mas-baratos-julio-2024-n75341#google_vignette (tomando el más caro)
+2024-07,34502000
+
+https://autotest.com.ar/noticias/precios-nubes-autos-un-millon-mas-baratos/ (tomando el más caro)
+2024-07,25224400
+
+https://www.lanacion.com.ar/autos/estos-son-los-10-autos-mas-baratos-en-julio-2024-nid07072024/
+2024-07,24367850
+
+https://www.lanacion.com.ar/autos/empiezan-a-llegar-los-precios-de-los-autos-cuanto-cuestan-los-mas-baratos-en-agosto-2024-nid06082024/ (tomando el más caro)
+2024-08,28068900
+
+https://www.lanacion.com.ar/autos/estos-son-los-10-autos-mas-baratos-en-agosto-2024-nid09082024/
+2024-08,23100000
+
+https://www.lanacion.com.ar/autos/estos-son-los-10-autos-mas-baratos-de-septiembre-tras-la-baja-del-impuesto-pais-nid10092024/ (tomando el más caro)
+2024-09,25451150
+
+https://www.eldestapeweb.com/atr/autos/cuales-son-los-10-autos-0km-mas-baratos-para-comprar-en-septiembre-2024-20249188370 (tomando el más caro)
+2024-09,25451150
+
+https://www.infobae.com/autos/2024/10/09/los-10-autos-0km-mas-baratos-para-comprar-en-octubre-2024-modelo-por-modelo/ (tomando el más caro)
+2024-10,24980000
+
+https://www.lanacion.com.ar/autos/estos-son-los-10-autos-mas-baratos-en-octubre-2024-nid08102024/
+2024-10,25193700
+
+https://www.lanacion.com.ar/autos/estos-son-los-precios-de-todas-las-pick-ups-en-noviembre-2024-nid07112024/ (tomando el más barato)
+2024-11,36630000
+
+https://www.lanacion.com.ar/autos/estos-son-los-10-autos-mas-baratos-en-noviembre-2024-nid09112024/
+2024-11,25697600
+
+RESPUESTA DE CHATGPT:
+
+Podemos realizar algunos pasos para intentar mejorar la fiabilidad de los datos recopilados y obtener una aproximación más representativa del precio promedio de autos en Argentina. Te sugiero seguir estos pasos:
+
+### 1. **Limpieza de datos y análisis inicial**  
+   Antes de aplicar cualquier técnica, debemos observar los datos para identificar posibles sesgos o irregularidades (valores extremos, inconsistencias temporales, etc.).
+
+### 2. **Métodos para mejorar la fiabilidad**  
+
+#### a) **Normalización según el tipo de fuente**  
+Dado que algunos datos provienen de promedios y otros del auto más barato o más caro, podemos aplicar factores de ajuste. Por ejemplo:  
+   - Para los autos más baratos: asumir que representan un X% por debajo del promedio.
+   - Para los autos más caros: asumir que representan un X% por encima del promedio.  
+
+Esto requerirá supuestos basados en información adicional sobre la distribución de precios (podríamos asumir que el auto más barato es el 20% por debajo del promedio y el más caro es el 30% por encima, como ejemplo).
+
+#### b) **Interpolación y suavizado**  
+   Aplicar interpolación temporal para estimar valores faltantes o suavizar los cambios abruptos. Técnicas como la media móvil o el suavizado exponencial pueden ayudar a reducir la variabilidad no representativa.
+
+#### c) **Eliminación de outliers**  
+   Usar métodos estadísticos como el rango intercuartílico (IQR) o el z-score para identificar y eliminar valores atípicos que puedan desvirtuar la tendencia general.
+
+#### d) **Ajuste por inflación**  
+   Como los precios de los autos están relacionados con la inflación en Argentina, es útil comparar los datos contra índices inflacionarios y ajustar los valores.
+
+#### e) **Tendencia temporal**  
+   Modelar la tendencia de los precios usando una regresión lineal o un modelo más sofisticado como SARIMA (si los datos son suficientes), para suavizar y completar faltantes.
+
+---
+
+### 3. **Análisis práctico**  
+
+Si quieres, puedo realizar un análisis inicial con tus datos para:  
+   - Limpiar los datos.
+   - Aplicar una interpolación para suavizar inconsistencias temporales.
+   - Visualizar tendencias y ajustar los precios considerando un posible sesgo (autos baratos vs caros).  
+
+¿Te gustaría proceder con este enfoque? Si me compartes el CSV, puedo comenzar.
+
+RESULTADO DE CHATGPT:
+
+2023-11,28199970
+2023-12,27249340
+2024-01,39000000
+2024-02,33705300
+2024-03,33705300
+2024-04,19864000
+2024-05,23197070
+2024-06,26530130
+2024-07,29863200
+2024-08,28068900
+2024-09,25451150
+2024-10,24980000
+2024-11,36630000

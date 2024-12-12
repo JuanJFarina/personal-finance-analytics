@@ -12,3 +12,4 @@ año,mes,sueldo_bruto_ars,sueldo_neto_ars,inflacion_del_mes_anterior,empresa,pue
 2024,9,950000.00,750000.00,4.20,TechCorp,DataEngineer,Mid,973.00,1305.00
 2024,10,950000.00,750000.00,3.50,TechCorp,DataEngineer,Mid,990.50,1220.00
 2024,11,1050000.00,850000.00,2.70,TechCorp,DataEngineer,Mid,1013.00,1190.00
+2024,12,1050000.00,840000.00,2.40,TechCorp,DataEngineer,Mid,1032.00,1120.00

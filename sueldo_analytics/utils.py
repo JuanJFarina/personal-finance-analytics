@@ -13,6 +13,10 @@ def set_bias(last_check: datetime) -> None:
     months_diff = current_date.month - last_check.month
     bias = years_diff * 12 + months_diff
 
+def get_bias() -> int:
+    global bias
+    return bias
+
 
 def obtener_escalar_de_inflacion(
     meses: int, datos_inflacion: pd.DataFrame = datos_personales

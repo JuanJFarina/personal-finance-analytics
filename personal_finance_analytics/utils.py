@@ -40,7 +40,7 @@ def show_plot(plot_id: int, xlabel: str, ylabel: str, title: str) -> None:
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.title(title)
-    plt.xticks(rotation=45)
+    plt.xticks(rotation=60)
     plt.legend()
     plt.tight_layout()
     plt.show()

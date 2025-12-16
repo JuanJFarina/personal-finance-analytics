@@ -11,8 +11,14 @@ scikit-learn = "==1.5.2"
 seaborn = "==0.13.2"
 openpyxl = "==3.1.5"
 ipykernel = "==6.29.5"
+fastapi = "==0.124.4"
+pydantic = "==2.12.5"
+uvicorn = "==0.38.0"
 
 [dev-packages]
 
 [requires]
 python_version = "3.11"
+
+[scripts]
+serve = "python -m personal_finance_analytics"

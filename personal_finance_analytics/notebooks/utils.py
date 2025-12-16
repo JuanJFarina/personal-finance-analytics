@@ -1,7 +1,8 @@
+import os
 import pandas as pd
 from matplotlib import pyplot as plt
 
-datos_personales = pd.read_csv("../data/sueldos.csv")
+datos_personales = pd.read_csv(f"https://docs.google.com/spreadsheets/d/{os.getenv('SALARIES_SPREADHSEET_ID')}/gviz/tq?tqx=out:csv&sheet=2020")
 
 
 def obtener_escalar_de_inflacion(

@@ -28,7 +28,7 @@ app = "personal_finance_analytics.api.app:app"
 "*" = ["py.typed", "*.md"]
 
 [tool.setuptools.dynamic]
-version = { attr = "git_stats_report.__version__" }
+version = { attr = "personal_finance_analytics.__version__" }
 readme = { file = ["README.md"], content-type = "text/markdown" }
 
 [tool.setuptools-pipfile]

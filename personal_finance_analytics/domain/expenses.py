@@ -92,7 +92,7 @@ def get_next_month_available_money_per_category() -> dict[str, dict[str, str]]:
 def get_current_month_available_money_per_category() -> AvailableFunds:
     current_month_expenses_df = get_current_month_expenses_dataframe()
     print(f"Current month expenses: \n{current_month_expenses_df}")
-    last_net_salary = get_last_net_salary()
+    last_net_salary = f"{get_last_net_salary():,.2f}"
     print(f"Last net salary: {last_net_salary}")
 
     available_funds: dict[str, Any] = {"net_salary": last_net_salary}

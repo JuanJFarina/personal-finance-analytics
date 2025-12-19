@@ -8,7 +8,7 @@ class CategoryFunds(BaseModel):
 
 
 class AvailableFunds(BaseModel):
-    net_salary: float
+    net_salary: str
     category_funds: list[CategoryFunds]
     balance: str
 

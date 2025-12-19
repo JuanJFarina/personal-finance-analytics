@@ -22,7 +22,7 @@ classifiers = [
 ]
 
 [project.scripts]
-sueldo_analytics = "sueldo_analytics.__main__:app"
+app = "personal_finance_analytics.api.app:app"
 
 [tool.setuptools.package-data]
 "*" = ["py.typed", "*.md"]
@@ -32,3 +32,6 @@ version = { attr = "git_stats_report.__version__" }
 readme = { file = ["README.md"], content-type = "text/markdown" }
 
 [tool.setuptools-pipfile]
+
+[tool.vercel.scripts]
+build = "python -m personal_finance_analytics"

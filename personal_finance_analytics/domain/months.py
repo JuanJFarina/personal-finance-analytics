@@ -21,8 +21,15 @@ def get_months_until_now():
     return MONTHS[:current_month]
 
 
+def get_current_month() -> str:
+    current_month = datetime.now().month
+    print(f"Current month index: {current_month}")
+    return MONTHS[current_month - 1]
+
+
 def get_next_month() -> str:
     current_month = datetime.now().month
+    print(f"Current month index: {current_month}")
     if current_month == 12:
         return MONTHS[0]
-    return MONTHS[current_month - 1]
+    return MONTHS[current_month]

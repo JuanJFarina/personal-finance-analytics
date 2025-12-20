@@ -71,9 +71,9 @@ def get_next_month_expenses_dataframe() -> pd.DataFrame:
 
 def get_next_month_available_money_per_category() -> dict[str, dict[str, str]]:
     next_month_expenses_df = get_next_month_expenses_dataframe()
-    print(f"Next month expenses: {next_month_expenses_df}")
+    logging.info(f"Next month expenses: {next_month_expenses_df}")
     last_net_salary = get_last_net_salary()
-    print(f"Last net salary: {last_net_salary}")
+    logging.info(f"Last net salary: {last_net_salary}")
 
     available_money_per_category = {}
     for category, max_percentage in MAXIMUM_PERCENTAGES_PER_CATEGORY.items():
@@ -85,7 +85,7 @@ def get_next_month_available_money_per_category() -> dict[str, dict[str, str]]:
             f"Maximum: {max_amount_for_category:,.2f}": f"Available: {float(max_amount_for_category - planned_expense):,.2f}"
         }
 
-    print(
+    logging.info(
         f"Available money per category for next month: {available_money_per_category}"
     )
 
@@ -94,9 +94,9 @@ def get_next_month_available_money_per_category() -> dict[str, dict[str, str]]:
 
 def get_current_month_available_money_per_category() -> AvailableFunds:
     current_month_expenses_df = get_current_month_expenses_dataframe()
-    print(f"Current month expenses: \n{current_month_expenses_df}")
+    logging.info(f"Current month expenses: \n{current_month_expenses_df}")
     last_net_salary = get_last_net_salary()
-    print(f"Last net salary: {last_net_salary}")
+    logging.info(f"Last net salary: {last_net_salary}")
 
     available_funds: dict[str, Any] = {"net_salary": f"{last_net_salary:,.2f}"}
 

@@ -1,4 +1,5 @@
 from datetime import datetime
+import logging
 
 MONTHS = [
     "enero",
@@ -23,13 +24,13 @@ def get_months_until_now():
 
 def get_current_month() -> str:
     current_month = datetime.now().month
-    print(f"Current month index: {current_month}")
+    logging.info(f"Current month index: {current_month}")
     return MONTHS[current_month - 1]
 
 
 def get_next_month() -> str:
     current_month = datetime.now().month
-    print(f"Current month index: {current_month}")
+    logging.info(f"Current month index: {current_month}")
     if current_month == 12:
         return MONTHS[0]
     return MONTHS[current_month]

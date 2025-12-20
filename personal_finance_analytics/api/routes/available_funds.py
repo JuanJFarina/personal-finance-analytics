@@ -32,3 +32,16 @@ async def get_available_funds(request: AuthorizedRequest) -> AvailableFunds:
     except Exception as e:
         logging.error(f"Error getting available funds: {e}")
         raise AvailableFundsException
+
+
+@router.get("/available-funds/{password}")
+async def get_available_funds_by_password(
+    password: str,
+) -> AvailableFunds:
+    request = AuthorizedRequest(password=password)
+    request.validate_password()
+    try:
+        return get_current_month_available_money_per_category()
+    except Exception as e:
+        logging.error(f"Error getting available funds: {e}")
+        raise AvailableFundsException

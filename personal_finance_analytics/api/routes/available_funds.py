@@ -1,10 +1,14 @@
+import logging
 import os
 from fastapi import APIRouter
 from pydantic import BaseModel
 
-from personal_finance_analytics.api.error_handling import AuthorizationError
-from personal_finance_analytics.domain.entities import AvailableFunds
-from personal_finance_analytics.domain.expenses import (
+from personal_finance_analytics.api.error_handling import (
+    AuthorizationError,
+    AvailableFundsException,
+)
+from personal_finance_analytics.domain import (
+    AvailableFunds,
     get_current_month_available_money_per_category,
 )
 
@@ -23,4 +27,8 @@ class AuthorizedRequest(BaseModel):
 @router.post("/available-funds")
 async def get_available_funds(request: AuthorizedRequest) -> AvailableFunds:
     request.validate_password()
-    return get_current_month_available_money_per_category()
+    try:
+        return get_current_month_available_money_per_category()
+    except Exception as e:
+        logging.error(f"Error getting available funds: {e}")
+        raise AvailableFundsException

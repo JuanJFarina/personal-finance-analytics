@@ -19,3 +19,34 @@ def get_last_net_salary() -> float:
     df = get_salaries_csv()
     last_salary = df["sueldo_neto_ars"].iloc[-1]
     return float(last_salary)
+
+
+def get_adjusted_salaries() -> pd.DataFrame:
+    datos_personales = get_salaries_csv()
+    datos_personales["sueldo_ajustado"] = datos_personales["sueldo_neto_ars"].iloc[0]
+
+    for i in range(1, len(datos_personales)):
+        if (
+            datos_personales.loc[i, "puesto"] != datos_personales.loc[i - 1, "puesto"]
+            or datos_personales.loc[i, "seniority"]
+            != datos_personales.loc[i - 1, "seniority"]
+        ):
+            datos_personales.loc[i, "sueldo_ajustado"] = datos_personales.loc[
+                i - 1, "sueldo_ajustado"
+            ] + (
+                datos_personales.loc[i, "sueldo_neto_ars"]
+                - datos_personales.loc[i - 1, "sueldo_neto_ars"]
+            )
+        elif datos_personales.loc[i, "puesto"] != None:
+            datos_personales.loc[i, "sueldo_ajustado"] = datos_personales.loc[
+                i - 1, "sueldo_ajustado"
+            ] * (1 + datos_personales.loc[i, "inflacion_del_mes_anterior"] / 100)
+        else:
+            datos_personales.loc[i, "sueldo_ajustado"] = 0.00
+
+    return datos_personales["sueldo_ajustado"]
+
+
+def get_last_adjusted_salary() -> float:
+    last_salary = get_adjusted_salaries()
+    return float(last_salary.iloc[-1])

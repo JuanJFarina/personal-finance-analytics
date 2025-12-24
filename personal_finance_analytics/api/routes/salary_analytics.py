@@ -2,6 +2,7 @@ import logging
 from fastapi import APIRouter
 
 from personal_finance_analytics.api import SalaryAnalyticsException
+from personal_finance_analytics.domain import FinanceAnalyst
 from .dependencies import AuthDepends
 
 router = APIRouter()
@@ -12,7 +13,7 @@ async def get_salary_analytics(
     password: AuthDepends,
 ) -> dict[str, str]:
     try:
-        return {}
+        return FinanceAnalyst.salary_analysis()
     except Exception as e:
         logging.error(f"Error getting salary analytics: {e}")
         raise SalaryAnalyticsException

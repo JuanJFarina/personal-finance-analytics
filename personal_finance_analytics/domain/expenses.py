@@ -32,7 +32,7 @@ MAXIMUM_PERCENTAGES_PER_CATEGORY = {
 }
 
 
-def get_expenses_dataframe() -> pd.DataFrame:
+def get_ongoing_year_expenses() -> pd.DataFrame:
     months = get_months_until_now()
     month_urls = {
         month: f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet={month}"
@@ -43,21 +43,21 @@ def get_expenses_dataframe() -> pd.DataFrame:
 
     for month in months:
         url = month_urls[month]
-        _read_csv_and_calculate_totals(month, url, months_totals)
+        _get_month_expenses_totals(month, url, months_totals)
     return pd.DataFrame(months_totals).set_index("mes")
 
 
-def get_current_month_expenses_dataframe() -> pd.DataFrame:
+def get_current_month_expenses() -> pd.DataFrame:
     current_month = get_current_month()
     url = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet={current_month}"
 
     months_totals = list[dict[str, str | float]]()
 
-    _read_csv_and_calculate_totals(current_month, url, months_totals)
+    _get_month_expenses_totals(current_month, url, months_totals)
     return pd.DataFrame(months_totals).set_index("mes")
 
 
-def get_next_month_expenses_dataframe() -> pd.DataFrame:
+def get_next_month_expenses() -> pd.DataFrame:
     next_month = get_next_month()
     url = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet={next_month}"
     if next_month == "enero":
@@ -65,12 +65,12 @@ def get_next_month_expenses_dataframe() -> pd.DataFrame:
 
     months_totals = []
 
-    _read_csv_and_calculate_totals(next_month, url, months_totals)
+    _get_month_expenses_totals(next_month, url, months_totals)
     return pd.DataFrame(months_totals).set_index("mes")
 
 
 def get_next_month_available_money_per_category() -> dict[str, dict[str, str]]:
-    next_month_expenses_df = get_next_month_expenses_dataframe()
+    next_month_expenses_df = get_next_month_expenses()
     logging.info(f"Next month expenses: {next_month_expenses_df}")
     last_net_salary = get_last_net_salary()
     logging.info(f"Last net salary: {last_net_salary}")
@@ -92,38 +92,9 @@ def get_next_month_available_money_per_category() -> dict[str, dict[str, str]]:
     return available_money_per_category
 
 
-def get_current_month_available_money_per_category() -> AvailableFunds:
-    current_month_expenses_df = get_current_month_expenses_dataframe()
-    logging.info(f"Current month expenses: \n{current_month_expenses_df}")
-    last_net_salary = get_last_net_salary()
-    logging.info(f"Last net salary: {last_net_salary}")
-
-    available_funds: dict[str, Any] = {"net_salary": f"{last_net_salary:,.2f}"}
-
-    category_funds_list = list[dict[str, str]]()
-    for category, max_percentage in MAXIMUM_PERCENTAGES_PER_CATEGORY.items():
-        max_amount_for_category = (max_percentage / 100) * last_net_salary
-        planned_expense = current_month_expenses_df.at[
-            current_month_expenses_df.index[0], category
-        ]
-        category_funds_list.append(
-            {
-                "category": category,
-                "max_allocation": f"{max_amount_for_category:,.2f}",
-                "available_funds": f"{float(max_amount_for_category - float(planned_expense)):,.2f}",
-            }
-        )
-
-    available_funds["category_funds"] = category_funds_list
-
-    available_funds["balance"] = (
-        f"{(last_net_salary * 0.7) - current_month_expenses_df.sum(axis=1).iloc[0]:,.2f}"
-    )
-
-    return AvailableFunds.model_validate(available_funds)
-
-
-def _calculate_month_totals(mes: str, df: pd.DataFrame) -> dict[str, str | float]:
+def _calculate_month_expenses_totals(
+    mes: str, df: pd.DataFrame
+) -> dict[str, str | float]:
     fila_total = df.iloc[-1]
     fila_limpia: dict[str, str | float] = {
         cat: pd.to_numeric(
@@ -138,8 +109,8 @@ def _calculate_month_totals(mes: str, df: pd.DataFrame) -> dict[str, str | float
     return fila_limpia
 
 
-def _read_csv_and_calculate_totals(
-    next_month: str, url: str, months_totals: list[dict[str, str | float]]
+def _get_month_expenses_totals(
+    month: str, url: str, months_totals: list[dict[str, str | float]]
 ) -> None:
     try:
         df = pd.read_csv(
@@ -151,4 +122,4 @@ def _read_csv_and_calculate_totals(
     except Exception as e:
         logging.error(f"Error reading CSV from {url}: {e}")
         raise ExpensesSpreadsheetException(f"Failed to read CSV from {url}") from e
-    months_totals.append(_calculate_month_totals(next_month, df))
+    months_totals.append(_calculate_month_expenses_totals(month, df))

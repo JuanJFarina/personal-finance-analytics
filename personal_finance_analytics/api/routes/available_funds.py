@@ -3,10 +3,7 @@ from fastapi import APIRouter
 
 from personal_finance_analytics.api import AvailableFundsException
 from .dependencies import AuthDepends
-from personal_finance_analytics.domain import (
-    AvailableFunds,
-    get_current_month_available_money_per_category,
-)
+from personal_finance_analytics.domain import AvailableFunds, FinanceAnalyst
 
 router = APIRouter()
 
@@ -16,7 +13,7 @@ async def get_available_funds(
     password: AuthDepends,
 ) -> AvailableFunds:
     try:
-        return get_current_month_available_money_per_category()
+        return FinanceAnalyst.month_expenses_analysis()
     except Exception as e:
         logging.error(f"Error getting available funds: {e}")
         raise AvailableFundsException

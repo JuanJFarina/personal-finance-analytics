@@ -33,3 +33,10 @@ async def available_funds_exception_handler(_: Request, exc: AuthorizationError)
         status_code=500,
         content={"message": "Error calculating available funds."},
     )
+
+
+async def salary_analytics_exception_handler(_: Request, exc: AuthorizationError):
+    return JSONResponse(
+        status_code=500,
+        content={"message": "Error calculating salary analytics."},
+    )

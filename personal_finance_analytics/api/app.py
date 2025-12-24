@@ -7,12 +7,14 @@ from personal_finance_analytics.domain.exceptions import (
 from .error_handling import (
     AuthorizationError,
     AvailableFundsException,
+    SalaryAnalyticsException,
     authorization_exception_handler,
     available_funds_exception_handler,
     expenses_exception_handler,
     salaries_exception_handler,
+    salary_analytics_exception_handler,
 )
-from .routes import available_funds_router
+from .routes import available_funds_router, salary_analytics_router
 
 app = FastAPI(
     title="Personal Finance Analytics API",
@@ -24,4 +26,6 @@ app.add_exception_handler(AuthorizationError, authorization_exception_handler)  
 app.add_exception_handler(AvailableFundsException, available_funds_exception_handler)  # type: ignore
 app.add_exception_handler(ExpensesSpreadsheetException, expenses_exception_handler)  # type: ignore
 app.add_exception_handler(SalariesSpreadsheetException, salaries_exception_handler)  # type: ignore
+app.add_exception_handler(SalaryAnalyticsException, salary_analytics_exception_handler)  # type: ignore
 app.include_router(available_funds_router)
+app.include_router(salary_analytics_router)

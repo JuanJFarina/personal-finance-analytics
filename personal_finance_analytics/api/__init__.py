@@ -1,6 +1,14 @@
 import uvicorn
 import os
 
+from .error_handling import (
+    AuthorizationError,
+    AvailableFundsException,
+    SalaryAnalyticsException,
+)
+
+__all__ = ["AuthorizationError", "AvailableFundsException", "SalaryAnalyticsException"]
+
 
 def run_backend() -> None:
     uvicorn.run(

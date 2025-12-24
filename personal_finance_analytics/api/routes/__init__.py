@@ -1,3 +1,4 @@
 from .available_funds import router as available_funds_router
+from .salary_analytics import router as salary_analytics_router
 
-__all__ = ["available_funds_router"]
+__all__ = ["available_funds_router", "salary_analytics_router"]

@@ -9,7 +9,7 @@ from .exceptions import ExpensesSpreadsheetException
 from .entities import AvailableFunds
 
 from .months import get_months_until_now, get_current_month, get_next_month
-from .salaries import get_last_net_salary
+from .salaries import get_current_month_salary
 
 SPREADSHEET_ID = os.getenv("EXPENSES_SPREADHSEET_ID")
 NEXT_YEAR_EXPENSES_SPREADHSEET_ID = os.getenv("NEXT_YEAR_EXPENSES_SPREADHSEET_ID")
@@ -57,6 +57,12 @@ def get_current_month_expenses() -> pd.DataFrame:
     return pd.DataFrame(months_totals).set_index("mes")
 
 
+def get_current_month_estimated_balance() -> float:
+    current_month = get_current_month()
+    url = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet={current_month}"
+    return _get_month_estimated_expenses_sum(url)
+
+
 def get_next_month_expenses() -> pd.DataFrame:
     next_month = get_next_month()
     url = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet={next_month}"
@@ -72,7 +78,7 @@ def get_next_month_expenses() -> pd.DataFrame:
 def get_next_month_available_money_per_category() -> dict[str, dict[str, str]]:
     next_month_expenses_df = get_next_month_expenses()
     logging.info(f"Next month expenses: {next_month_expenses_df}")
-    last_net_salary = get_last_net_salary()
+    last_net_salary = get_current_month_salary()
     logging.info(f"Last net salary: {last_net_salary}")
 
     available_money_per_category = {}
@@ -123,3 +129,20 @@ def _get_month_expenses_totals(
         logging.error(f"Error reading CSV from {url}: {e}")
         raise ExpensesSpreadsheetException(f"Failed to read CSV from {url}") from e
     months_totals.append(_calculate_month_expenses_totals(month, df))
+
+
+def _get_month_estimated_expenses_sum(url: str) -> float:
+    try:
+        df = pd.read_csv(
+            url,
+            usecols=["media movil"],
+        )
+    except Exception as e:
+        logging.error(f"Error reading CSV from {url}: {e}")
+        raise ExpensesSpreadsheetException(f"Failed to read CSV from {url}") from e
+    return float(
+        pd.to_numeric(
+            df.iloc[-1]["media movil"].replace("$", "").replace(",", "").strip(),
+            errors="coerce",
+        )
+    )

@@ -2,7 +2,11 @@ from personal_finance_analytics.domain.exceptions import (
     ExpensesSpreadsheetException,
     SalariesSpreadsheetException,
 )
-from .exceptions import AuthorizationError
+from .exceptions import (
+    AuthorizationError,
+    AvailableFundsException,
+    SalaryAnalyticsException,
+)
 from fastapi.responses import JSONResponse
 from fastapi.requests import Request
 
@@ -28,14 +32,14 @@ async def salaries_exception_handler(_: Request, exc: SalariesSpreadsheetExcepti
     )
 
 
-async def available_funds_exception_handler(_: Request, exc: AuthorizationError):
+async def available_funds_exception_handler(_: Request, exc: AvailableFundsException):
     return JSONResponse(
         status_code=500,
         content={"message": "Error calculating available funds."},
     )
 
 
-async def salary_analytics_exception_handler(_: Request, exc: AuthorizationError):
+async def salary_analytics_exception_handler(_: Request, exc: SalaryAnalyticsException):
     return JSONResponse(
         status_code=500,
         content={"message": "Error calculating salary analytics."},

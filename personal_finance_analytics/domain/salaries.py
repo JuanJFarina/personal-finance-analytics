@@ -15,7 +15,7 @@ def get_salaries_csv() -> pd.DataFrame:
         raise SalariesSpreadsheetException("Failed to read salaries CSV") from e
 
 
-def get_last_net_salary() -> float:
+def get_current_month_salary() -> float:
     df = get_salaries_csv()
     last_salary = df["sueldo_neto_ars"].iloc[-1]
     return float(last_salary)

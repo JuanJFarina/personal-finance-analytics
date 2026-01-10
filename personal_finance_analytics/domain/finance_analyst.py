@@ -46,7 +46,7 @@ class FinanceAnalyst:
         available_funds["balance"] = (
             f"{(current_month_salary * 0.7) - current_month_expenses_df.sum(axis=1).iloc[0]:,.2f}"
         )
-        available_funds["estimated__month_balance"] = (
+        available_funds["estimated_month_balance"] = (
             f"{(current_month_salary * 0.7) - current_month_estimated_balance:,.2f}"
         )
 

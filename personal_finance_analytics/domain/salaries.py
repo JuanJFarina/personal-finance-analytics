@@ -1,6 +1,7 @@
 import logging
 import pandas as pd
-import os
+
+from personal_finance_analytics.utils import Settings
 
 from .exceptions import SalariesSpreadsheetException
 
@@ -8,7 +9,7 @@ from .exceptions import SalariesSpreadsheetException
 def get_salaries_csv() -> pd.DataFrame:
     try:
         return pd.read_csv(  # type: ignore
-            f"https://docs.google.com/spreadsheets/d/{os.getenv('SALARIES_SPREADHSEET_ID')}/gviz/tq?tqx=out:csv&sheet=2020"
+            f"https://docs.google.com/spreadsheets/d/{Settings.SALARIES_SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=2020"
         )
     except Exception as e:
         logging.error("Error reading salaries CSV: %s", e)

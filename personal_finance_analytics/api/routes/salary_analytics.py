@@ -1,7 +1,7 @@
 import logging
 from fastapi import APIRouter
 
-from personal_finance_analytics.api import SalaryAnalyticsException
+from personal_finance_analytics.api.error_handling import SalaryAnalyticsException
 from personal_finance_analytics.domain import FinanceAnalyst
 from .dependencies import AuthDepends
 

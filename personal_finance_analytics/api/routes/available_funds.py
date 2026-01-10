@@ -1,7 +1,7 @@
 import logging
 from fastapi import APIRouter
 
-from personal_finance_analytics.api import AvailableFundsException
+from personal_finance_analytics.api.error_handling import AvailableFundsException
 from .dependencies import AuthDepends
 from personal_finance_analytics.domain import AvailableFunds, FinanceAnalyst
 

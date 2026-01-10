@@ -1,19 +1,16 @@
 import uvicorn
-import os
 
-from .error_handling import (
-    AuthorizationError,
-    AvailableFundsException,
-    SalaryAnalyticsException,
-)
+from .app import app
+from personal_finance_analytics.utils import Settings
 
-__all__ = ["AuthorizationError", "AvailableFundsException", "SalaryAnalyticsException"]
+
+__all__ = ["app"]
 
 
 def run_backend() -> None:
     uvicorn.run(
         "personal_finance_analytics.api.app:app",
-        host=os.getenv("HOST") or "0.0.0.0",
+        host=Settings.HOST,
         port=8000,
         loop="asyncio",
         reload=True,

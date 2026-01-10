@@ -1,18 +1,15 @@
 import logging
-import os
 import pandas as pd
 
-from typing import Any
+from personal_finance_analytics.utils import Settings
 
 from .exceptions import ExpensesSpreadsheetException
-
-from .entities import AvailableFunds
 
 from .months import get_months_until_now, get_current_month, get_next_month
 from .salaries import get_current_month_salary
 
-SPREADSHEET_ID = os.getenv("EXPENSES_SPREADHSEET_ID")
-NEXT_YEAR_EXPENSES_SPREADHSEET_ID = os.getenv("NEXT_YEAR_EXPENSES_SPREADHSEET_ID")
+SPREADSHEET_ID = Settings.EXPENSES_SPREADSHEET_ID
+NEXT_YEAR_EXPENSES_SPREADSHEET_ID = Settings.NEXT_YEAR_EXPENSES_SPREADSHEET_ID
 
 EXPENSES_GROUPS = {
     "fijos": ["alquileres", "servicios_esenciales", "servicios_no_esenciales"],
@@ -67,7 +64,7 @@ def get_next_month_expenses() -> pd.DataFrame:
     next_month = get_next_month()
     url = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet={next_month}"
     if next_month == "enero":
-        url = f"https://docs.google.com/spreadsheets/d/{NEXT_YEAR_EXPENSES_SPREADHSEET_ID}/gviz/tq?tqx=out:csv&sheet={next_month}"
+        url = f"https://docs.google.com/spreadsheets/d/{NEXT_YEAR_EXPENSES_SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet={next_month}"
 
     months_totals = []
 

@@ -1,3 +1,4 @@
+from .configurer import configure_exception_handlers
 from .exceptions import (
     AuthorizationError,
     AvailableFundsException,
@@ -16,6 +17,7 @@ __all__ = [
     "AvailableFundsException",
     "authorization_exception_handler",
     "available_funds_exception_handler",
+    "configure_exception_handlers",
     "expenses_exception_handler",
     "salaries_exception_handler",
     "SalaryAnalyticsException",

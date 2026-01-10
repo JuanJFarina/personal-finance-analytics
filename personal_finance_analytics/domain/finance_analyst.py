@@ -25,7 +25,7 @@ class FinanceAnalyst:
         current_month_salary = get_current_month_salary()
         logging.info(f"Last net salary: {current_month_salary}")
 
-        available_funds: dict[str, Any] = {"net_salary": f"{current_month_salary:,.2f}"}
+        available_funds: dict[str, Any] = {"net_salary": f"${current_month_salary:,.0f}"}
 
         category_funds_list = list[dict[str, str]]()
         for category, max_percentage in MAXIMUM_PERCENTAGES_PER_CATEGORY.items():
@@ -36,18 +36,18 @@ class FinanceAnalyst:
             category_funds_list.append(
                 {
                     "category": category,
-                    "max_allocation": f"{max_amount_for_category:,.2f}",
-                    "available_funds": f"{float(max_amount_for_category - float(planned_expense)):,.2f}",
+                    "max_allocation": f"${max_amount_for_category:,.0f}",
+                    "available_funds": f"${float(max_amount_for_category - float(planned_expense)):,.0f}",
                 }
             )
 
         available_funds["category_funds"] = category_funds_list
 
         available_funds["balance"] = (
-            f"{(current_month_salary * 0.7) - current_month_expenses_df.sum(axis=1).iloc[0]:,.2f}"
+            f"${(current_month_salary * 0.7) - current_month_expenses_df.sum(axis=1).iloc[0]:,.0f}"
         )
         available_funds["estimated_month_balance"] = (
-            f"{(current_month_salary * 0.7) - current_month_estimated_balance:,.2f}"
+            f"${(current_month_salary * 0.7) - current_month_estimated_balance:,.0f}"
         )
 
         return AvailableFunds.model_validate(available_funds)

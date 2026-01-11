@@ -22,7 +22,7 @@ def get_current_month_salary() -> float:
     return float(last_salary)
 
 
-def get_adjusted_salaries() -> pd.DataFrame:
+def get_adjusted_salaries(INFLATION_SINCE_LAST_PROMOTION: bool = True) -> pd.DataFrame:
     datos_personales = get_salaries_csv()
     datos_personales["sueldo_ajustado"] = datos_personales["sueldo_neto_ars"].iloc[0]
 
@@ -31,7 +31,7 @@ def get_adjusted_salaries() -> pd.DataFrame:
             datos_personales.loc[i, "puesto"] != datos_personales.loc[i - 1, "puesto"]
             or datos_personales.loc[i, "seniority"]
             != datos_personales.loc[i - 1, "seniority"]
-        ):
+        ) and INFLATION_SINCE_LAST_PROMOTION:
             datos_personales.loc[i, "sueldo_ajustado"] = datos_personales.loc[
                 i - 1, "sueldo_ajustado"
             ] + (
@@ -51,3 +51,9 @@ def get_adjusted_salaries() -> pd.DataFrame:
 def get_last_adjusted_salary() -> float:
     last_salary = get_adjusted_salaries()
     return float(last_salary.iloc[-1])
+
+
+def get_personal_delta() -> str:
+    personal_adjusted_salary = float(get_adjusted_salaries(INFLATION_SINCE_LAST_PROMOTION=False).iloc[-1])
+    last_salary = get_current_month_salary()
+    return f"{((last_salary * 100) / personal_adjusted_salary) - 100:.2f} % from first salary adjusted ($ {personal_adjusted_salary:,.0f}) to current salary ($ {get_current_month_salary():,.0f})"

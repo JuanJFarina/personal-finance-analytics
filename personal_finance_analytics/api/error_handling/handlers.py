@@ -1,6 +1,7 @@
-from personal_finance_analytics.domain.exceptions import (
+from personal_finance_analytics.domain import (
     ExpensesSpreadsheetException,
     SalariesSpreadsheetException,
+    JuniorToSeniorDeltaException,
 )
 from .exceptions import (
     AuthorizationError,
@@ -35,6 +36,15 @@ async def salaries_exception_handler(
     return JSONResponse(
         status_code=500,
         content={"message": "Error reading salaries spreadsheet."},
+    )
+
+
+async def it_delta_exception_handler(
+    _: Request, exc: JuniorToSeniorDeltaException
+) -> JSONResponse:
+    return JSONResponse(
+        status_code=500,
+        content={"message": "Error calculating IT delta."},
     )
 
 

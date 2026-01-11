@@ -1,13 +1,21 @@
 from typing import Any
 
-from .it_salaries import get_it_salary_percentile, get_it_salary_rank_per_seniority
+from .it_salaries import (
+    get_it_salary_percentile,
+    get_it_salary_rank_per_seniority,
+    get_junior_to_senior_delta,
+)
 from .entities import AvailableFunds, SalaryAnalytics
 from .expenses import (
     get_current_month_estimated_balance,
     get_current_month_expenses,
     MAXIMUM_PERCENTAGES_PER_CATEGORY,
 )
-from .salaries import get_last_adjusted_salary, get_current_month_salary
+from .salaries import (
+    get_last_adjusted_salary,
+    get_current_month_salary,
+    get_personal_delta,
+)
 
 
 class FinanceAnalyst:
@@ -17,7 +25,9 @@ class FinanceAnalyst:
             net_salary=f"$ {get_current_month_salary():,.2f}",
             adjusted_salary=f"$ {get_last_adjusted_salary():,.2f}",
             it_salary_percentile=f"{get_it_salary_percentile():.2f} %",
-            rank_per_seniority=get_it_salary_rank_per_seniority(),
+            rank_per_seniority=get_it_salary_rank_per_seniority()[0],
+            junior_to_senior_delta=get_junior_to_senior_delta(),
+            personal_delta=get_personal_delta(),
         )
 
     @staticmethod

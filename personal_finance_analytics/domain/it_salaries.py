@@ -3,6 +3,10 @@ import pandas as pd
 
 from pathlib import Path
 
+from pydantic import BaseModel
+
+from .exceptions import JuniorToSeniorDeltaException
+
 from .entities import SenioritySalary
 
 from .months import get_months_since
@@ -129,7 +133,14 @@ def get_it_salary_percentile() -> float:
     ) / len(it_salaries_sorted)
 
 
-def get_it_salary_rank_per_seniority() -> list[SenioritySalary]:
+class RawSenioritySalary(BaseModel):
+    label: str
+    salary_float: float
+
+
+def get_it_salary_rank_per_seniority() -> tuple[
+    list[SenioritySalary], list[RawSenioritySalary]
+]:
     juniors, semiseniors, seniors = prepare_sysarmy_data()
     current_it_salary = get_current_it_salary()
     summary = [
@@ -158,10 +169,30 @@ def get_it_salary_rank_per_seniority() -> list[SenioritySalary]:
 
     combined = list(zip(summary, labels))
     combined.sort(key=lambda x: x[0])
-    return [
-        SenioritySalary(
-            label=label,
-            salary=f"$ {salary:,.0f}",
+    return (
+        [
+            SenioritySalary(
+                label=label,
+                salary=f"$ {salary:,.0f}",
+            )
+            for salary, label in combined
+        ],
+        [
+            RawSenioritySalary(label=label, salary_float=salary)
+            for salary, label in combined
+        ],
+    )
+
+
+def get_junior_to_senior_delta() -> str:
+    salaries = get_it_salary_rank_per_seniority()[1]
+    for seniority in salaries:
+        if seniority.label == "Juniors Mean":
+            junior_mean_salary = seniority
+        if seniority.label == "Seniors Mean":
+            senior_mean_salary = seniority
+    if not junior_mean_salary or not senior_mean_salary:  # type: ignore
+        raise JuniorToSeniorDeltaException(
+            "Could not find junior or senior mean salary."
         )
-        for salary, label in combined
-    ]
+    return f"{((senior_mean_salary.salary_float * 100) / junior_mean_salary.salary_float) - 100:.2f} % from Junior ($ {junior_mean_salary.salary_float:,.0f}) to Senior ($ {senior_mean_salary.salary_float:,.0f})"

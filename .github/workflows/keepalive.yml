@@ -15,5 +15,5 @@ jobs:
           curl -f -sS \
             -w "HTTP %{http_code}\n" \
             --connect-timeout 15 \
-            --max-time 90 \
+            --max-time 120 \
             https://personal-finance-analytics-945u.onrender.com/healthcheck

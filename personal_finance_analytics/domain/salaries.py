@@ -23,7 +23,7 @@ def get_current_month_salary() -> float:
 
 
 def get_salary_series(months_ago: int = 0) -> pd.Series:
-    return get_salaries_csv().iloc[months_ago - 1]
+    return get_salaries_csv().iloc[-months_ago - 1]
 
 
 def get_net_usd_salary_months_ago(months_ago: int) -> float:

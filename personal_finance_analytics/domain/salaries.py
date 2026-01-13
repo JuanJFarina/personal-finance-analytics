@@ -92,6 +92,3 @@ def get_personal_delta() -> str:
     )
     last_salary = get_current_month_salary()
     return f"{((last_salary * 100) / personal_adjusted_salary) - 100:.2f} % from first salary adjusted ($ {personal_adjusted_salary:,.0f}) to current salary ($ {get_current_month_salary():,.0f})"
-
-
-print(get_salary_variance())

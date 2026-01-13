@@ -15,6 +15,7 @@ from .salaries import (
     get_last_adjusted_salary,
     get_current_month_salary,
     get_personal_delta,
+    get_salary_variance,
 )
 
 
@@ -24,6 +25,7 @@ class FinanceAnalyst:
         return SalaryAnalytics(
             net_salary=f"$ {get_current_month_salary():,.2f}",
             adjusted_salary=f"$ {get_last_adjusted_salary():,.2f}",
+            salary_variance_in_usd=get_salary_variance(),
             it_salary_percentile=f"{get_it_salary_percentile():.2f} %",
             rank_per_seniority=get_it_salary_rank_per_seniority()[0],
             junior_to_senior_delta=get_junior_to_senior_delta(),

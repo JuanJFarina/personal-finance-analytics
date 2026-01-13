@@ -22,6 +22,39 @@ def get_current_month_salary() -> float:
     return float(last_salary)
 
 
+def get_salary_series(months_ago: int = 0) -> pd.Series:
+    return get_salaries_csv().iloc[months_ago - 1]
+
+
+def get_net_usd_salary_months_ago(months_ago: int) -> float:
+    salary_series = get_salary_series(months_ago)
+    return float(salary_series["dolar_oficial"])
+
+
+def get_variance(current: float, past: float) -> str:
+    variance = (current / past) * 10
+    if current > past:
+        return f"+{variance:,.2f} %"
+    else:
+        return f"-{variance:,.2f} %"
+
+
+def get_salary_variance() -> str:
+    current_salary = get_net_usd_salary_months_ago(0)
+    salary_three_months_ago = get_net_usd_salary_months_ago(3)
+    salary_six_months_ago = get_net_usd_salary_months_ago(6)
+    salary_one_year_ago = get_net_usd_salary_months_ago(12)
+
+    m3_variance = get_variance(current_salary, salary_three_months_ago)
+    m6_variance = get_variance(current_salary, salary_six_months_ago)
+    y1_variance = get_variance(current_salary, salary_one_year_ago)
+
+    return (
+        f"$ {current_salary:,.2f} | {m3_variance} than 3 months ago | "
+        f"{m6_variance} than 6 months ago | {y1_variance} than 1 year ago"
+    )
+
+
 def get_adjusted_salaries(INFLATION_SINCE_LAST_PROMOTION: bool = True) -> pd.DataFrame:
     datos_personales = get_salaries_csv()
     datos_personales["sueldo_ajustado"] = datos_personales["sueldo_neto_ars"].iloc[0]
@@ -54,6 +87,11 @@ def get_last_adjusted_salary() -> float:
 
 
 def get_personal_delta() -> str:
-    personal_adjusted_salary = float(get_adjusted_salaries(INFLATION_SINCE_LAST_PROMOTION=False).iloc[-1])
+    personal_adjusted_salary = float(
+        get_adjusted_salaries(INFLATION_SINCE_LAST_PROMOTION=False).iloc[-1]
+    )
     last_salary = get_current_month_salary()
     return f"{((last_salary * 100) / personal_adjusted_salary) - 100:.2f} % from first salary adjusted ($ {personal_adjusted_salary:,.0f}) to current salary ($ {get_current_month_salary():,.0f})"
+
+
+print(get_salary_variance())

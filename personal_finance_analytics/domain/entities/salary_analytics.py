@@ -10,6 +10,7 @@ class SenioritySalary(BaseModel):
 class SalaryAnalytics(BaseModel):
     net_salary: Annotated[str, Field(min_length=7)]
     adjusted_salary: Annotated[str, Field(min_length=7)]
+    salary_variance_in_usd: Annotated[str, Field(min_length=10)]
     it_salary_percentile: Annotated[str, Field(min_length=2)]
     rank_per_seniority: list[SenioritySalary]
     junior_to_senior_delta: Annotated[str, Field(min_length=2)]

@@ -28,7 +28,7 @@ def get_salary_series(months_ago: int = 0) -> pd.Series:
 
 def get_net_usd_salary_months_ago(months_ago: int) -> float:
     salary_series = get_salary_series(months_ago)
-    return float(salary_series["dolar_oficial"])
+    return float(salary_series["sueldo_neto_ars"] / salary_series["dolar_oficial"])
 
 
 def get_variance(current: float, past: float) -> str:

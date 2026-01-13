@@ -1,29 +1,16 @@
-import logging
 import pandas as pd
 
-from personal_finance_analytics.utils import Settings
-
-from .exceptions import SalariesSpreadsheetException
-
-
-def get_salaries_csv() -> pd.DataFrame:
-    try:
-        return pd.read_csv(  # type: ignore
-            f"https://docs.google.com/spreadsheets/d/{Settings.SALARIES_SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=2020"
-        )
-    except Exception as e:
-        logging.error("Error reading salaries CSV: %s", e)
-        raise SalariesSpreadsheetException("Failed to read salaries CSV") from e
+from personal_finance_analytics.infrastructure import get_salaries_data
 
 
 def get_current_month_salary() -> float:
-    df = get_salaries_csv()
+    df = get_salaries_data()
     last_salary = df["sueldo_neto_ars"].iloc[-1]
     return float(last_salary)
 
 
 def get_salary_series(months_ago: int = 0) -> pd.Series:
-    return get_salaries_csv().iloc[-months_ago - 1]
+    return get_salaries_data().iloc[-months_ago - 1]
 
 
 def get_net_usd_salary_months_ago(months_ago: int) -> float:
@@ -56,7 +43,7 @@ def get_salary_variance() -> str:
 
 
 def get_adjusted_salaries(INFLATION_SINCE_LAST_PROMOTION: bool = True) -> pd.DataFrame:
-    datos_personales = get_salaries_csv()
+    datos_personales = get_salaries_data()
     datos_personales["sueldo_ajustado"] = datos_personales["sueldo_neto_ars"].iloc[0]
 
     for i in range(1, len(datos_personales)):

@@ -5,20 +5,20 @@ from pathlib import Path
 
 from pydantic import BaseModel
 
-from .exceptions import JuniorToSeniorDeltaException
+from personal_finance_analytics.utils import JuniorToSeniorDeltaException
 
 from .entities import SenioritySalary
 
 from .months import get_months_since
 
-from .salaries import get_current_month_salary, get_salaries_csv
+from .salaries import get_current_month_salary, get_salaries_data
 
 
 CWD_PATH = Path(__file__).parent.parent.resolve()
 
 
 def get_inflation_scalar(months: int) -> float:
-    salaries_csv = get_salaries_csv()
+    salaries_csv = get_salaries_data()
     scalar = 1
     for m in range(months, 0, -1):
         last_month_inflation = salaries_csv["inflacion_del_mes_anterior"].iloc[-m]

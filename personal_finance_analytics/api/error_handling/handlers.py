@@ -1,12 +1,10 @@
-from personal_finance_analytics.domain import (
+from personal_finance_analytics.utils import (
     ExpensesSpreadsheetException,
     SalariesSpreadsheetException,
-    JuniorToSeniorDeltaException,
-)
-from .exceptions import (
     AuthorizationError,
     AvailableFundsException,
     SalaryAnalyticsException,
+    JuniorToSeniorDeltaException,
 )
 from fastapi.responses import JSONResponse
 from fastapi.requests import Request

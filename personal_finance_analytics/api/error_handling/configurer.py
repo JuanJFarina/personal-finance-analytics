@@ -1,9 +1,7 @@
 from fastapi import FastAPI
-from personal_finance_analytics.domain.exceptions import (
+from personal_finance_analytics.utils import (
     ExpensesSpreadsheetException,
     SalariesSpreadsheetException,
-)
-from .exceptions import (
     AuthorizationError,
     AvailableFundsException,
     SalaryAnalyticsException,

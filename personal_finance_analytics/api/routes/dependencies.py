@@ -1,8 +1,7 @@
 from typing import Annotated
 from fastapi import Depends
 
-from personal_finance_analytics.api.error_handling import AuthorizationError
-from personal_finance_analytics.utils import Settings
+from personal_finance_analytics.utils import AuthorizationError, Settings
 
 
 async def authorize_request(password: str):

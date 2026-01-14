@@ -4,6 +4,7 @@ from .it_salaries import (
     get_it_salary_percentile,
     get_it_salary_rank_per_seniority,
     get_junior_to_senior_delta,
+    get_personal_salary_it_delta_adjusted,
 )
 from .entities import AvailableFunds, SalaryAnalytics
 from .expenses import (
@@ -30,6 +31,7 @@ class FinanceAnalyst:
             rank_per_seniority=get_it_salary_rank_per_seniority()[0],
             junior_to_senior_delta=get_junior_to_senior_delta(),
             personal_delta=get_personal_delta(),
+            it_delta_adjusted_salary=get_personal_salary_it_delta_adjusted(),
         )
 
     @staticmethod
@@ -58,5 +60,3 @@ class FinanceAnalyst:
         print(f"{available_funds = }")
 
         return AvailableFunds.model_validate(available_funds)
-
-FinanceAnalyst.month_expenses_analysis()

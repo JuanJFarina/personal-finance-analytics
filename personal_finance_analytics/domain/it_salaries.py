@@ -5,13 +5,16 @@ from pathlib import Path
 
 from pydantic import BaseModel
 
-from personal_finance_analytics.utils import JuniorToSeniorDeltaException
+from personal_finance_analytics.utils import (
+    JuniorToSeniorDeltaException,
+    PersonalSalaryITDeltaAdjustedException,
+)
 
 from .entities import SenioritySalary
 
 from .months import get_months_since
 
-from .salaries import get_current_month_salary, get_salaries_data
+from .salaries import get_current_month_salary, get_salaries_data, get_adjusted_salaries
 
 
 CWD_PATH = Path(__file__).parent.parent.resolve()
@@ -196,3 +199,24 @@ def get_junior_to_senior_delta() -> str:
             "Could not find junior or senior mean salary."
         )
     return f"{((senior_mean_salary.salary_float * 100) / junior_mean_salary.salary_float) - 100:.2f} % from Junior ($ {junior_mean_salary.salary_float:,.0f}) to Senior ($ {senior_mean_salary.salary_float:,.0f})"
+
+
+def get_personal_salary_it_delta_adjusted() -> str:
+    personal_adjusted_salary = float(
+        get_adjusted_salaries(INFLATION_SINCE_LAST_PROMOTION=False).iloc[-1]
+    )
+    salaries = get_it_salary_rank_per_seniority()[1]
+    for seniority in salaries:
+        if seniority.label == "Juniors Mean":
+            junior_mean_salary = seniority
+        if seniority.label == "Seniors Mean":
+            senior_mean_salary = seniority
+    if not junior_mean_salary or not senior_mean_salary:  # type: ignore
+        raise PersonalSalaryITDeltaAdjustedException(
+            "Could not find junior or senior mean salary."
+        )
+    it_delta = (
+        (senior_mean_salary.salary_float * 100) / junior_mean_salary.salary_float
+    ) * 0.01
+    print(f"{it_delta = }")
+    return f"{personal_adjusted_salary * it_delta:,.0f}"

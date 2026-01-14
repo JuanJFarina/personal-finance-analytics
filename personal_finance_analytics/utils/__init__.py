@@ -5,6 +5,7 @@ from .exceptions import (
     AvailableFundsException,
     SalaryAnalyticsException,
     JuniorToSeniorDeltaException,
+    PersonalSalaryITDeltaAdjustedException,
 )
 from .settings import Settings
 
@@ -16,4 +17,5 @@ __all__ = [
     "AvailableFundsException",
     "SalaryAnalyticsException",
     "JuniorToSeniorDeltaException",
+    "PersonalSalaryITDeltaAdjustedException",
 ]

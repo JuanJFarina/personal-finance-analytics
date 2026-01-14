@@ -15,5 +15,6 @@ class SalaryAnalytics(BaseModel):
     rank_per_seniority: list[SenioritySalary]
     junior_to_senior_delta: Annotated[str, Field(min_length=2)]
     personal_delta: Annotated[str, Field(min_length=2)]
+    it_delta_adjusted_salary: Annotated[str, Field(min_length=7)]
 
     model_config = ConfigDict(arbitrary_types_allowed=True)

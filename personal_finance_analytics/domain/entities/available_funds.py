@@ -13,5 +13,6 @@ class AvailableFunds(BaseModel):
     category_funds: list[CategoryFunds]
     balance: Annotated[str, Field(min_length=3)]
     estimated_month_balance: Annotated[str, Field(min_length=3)]
+    daily_limit: Annotated[str, Field(min_length=10)]
 
     model_config = ConfigDict(arbitrary_types_allowed=True)

@@ -1,5 +1,7 @@
 from typing import Any
 
+from personal_finance_analytics.domain.months import get_remaining_days_in_current_month
+
 from .it_salaries import (
     get_it_salary_percentile,
     get_it_salary_rank_per_seniority,
@@ -39,6 +41,9 @@ class FinanceAnalyst:
         current_month_expenses_df = get_current_month_expenses()
         current_month_estimated_balance = get_current_month_estimated_balance()
         current_month_salary = get_current_month_salary()
+        current_balance = (current_month_salary * 0.8) - current_month_expenses_df.sum(
+            axis=1
+        ).iloc[0]
 
         available_funds: dict[str, Any] = {
             "net_salary": f"$ {current_month_salary:,.0f}"
@@ -50,11 +55,12 @@ class FinanceAnalyst:
 
         available_funds["category_funds"] = category_funds_list
 
-        available_funds["balance"] = (
-            f"$ {(current_month_salary * 0.8) - current_month_expenses_df.sum(axis=1).iloc[0]:,.0f}"
-        )
+        available_funds["balance"] = f"$ {current_balance:,.0f}"
         available_funds["estimated_month_balance"] = (
             f"$ {(current_month_salary * 0.8) - current_month_estimated_balance:,.0f}"
+        )
+        available_funds["daily_limit"] = (
+            f"Your daily limit for the rest of the month is $ {(current_balance / get_remaining_days_in_current_month):,.0f}"
         )
 
         print(f"{available_funds = }")

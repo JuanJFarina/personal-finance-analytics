@@ -1,5 +1,6 @@
-from datetime import datetime
 import logging
+from datetime import datetime, date
+from calendar import monthrange
 
 MONTHS = [
     "enero",
@@ -41,3 +42,9 @@ def get_next_month() -> str:
     if current_month == 12:
         return MONTHS[0]
     return MONTHS[current_month]
+
+
+def get_remaining_days_in_current_month() -> int:
+    today = date.today()
+    _, last_day = monthrange(today.year, today.month)
+    return last_day - today.day

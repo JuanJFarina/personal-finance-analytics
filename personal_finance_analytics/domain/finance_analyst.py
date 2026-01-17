@@ -60,7 +60,7 @@ class FinanceAnalyst:
             f"$ {(current_month_salary * 0.8) - current_month_estimated_balance:,.0f}"
         )
         available_funds["daily_limit"] = (
-            f"Your daily limit for the rest of the month is $ {(current_balance / get_remaining_days_in_current_month):,.0f}"
+            f"Your daily limit for the rest of the month is $ {(current_balance / get_remaining_days_in_current_month()):,.0f}"
         )
 
         print(f"{available_funds = }")

@@ -16,9 +16,9 @@ MAXIMUM_PERCENTAGES_PER_CATEGORY = {
     "alquileres": 30,
     "servicios_esenciales": 7,
     "servicios_no_esenciales": 5,
-    "hogar": 15,
-    "transporte": 5,
-    "salidas": 8,
+    "hogar": 10,
+    "transporte": 3,
+    "salidas": 5,
     "shopping": 7,
     "otros": 3,
 }

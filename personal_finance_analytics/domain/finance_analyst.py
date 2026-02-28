@@ -53,6 +53,8 @@ class FinanceAnalyst:
             current_month_expenses_df, current_month_salary
         )[0]
 
+        remaining_days = get_remaining_days_in_current_month() + 1
+
         available_funds["category_funds"] = category_funds_list
 
         available_funds["balance"] = f"$ {current_balance:,.0f}"
@@ -60,7 +62,7 @@ class FinanceAnalyst:
             f"$ {(current_month_salary * 0.7) - current_month_estimated_balance:,.0f}"
         )
         available_funds["daily_limit"] = (
-            f"Your daily limit for the rest of the month is $ {(current_balance / get_remaining_days_in_current_month()):,.0f}"
+            f"Your daily limit for the rest of the month is $ {(current_balance / remaining_days):,.0f}"
         )
 
         print(f"{available_funds = }")

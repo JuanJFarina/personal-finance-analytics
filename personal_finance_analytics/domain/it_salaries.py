@@ -21,6 +21,7 @@ CWD_PATH = Path(__file__).parent.parent.resolve()
 
 
 def get_inflation_scalar(months: int) -> float:
+    """months is the number of months to go back to calculate the inflation scalar"""
     salaries_csv = get_salaries_data()
     scalar = 1
     for m in range(months, 0, -1):
@@ -31,7 +32,7 @@ def get_inflation_scalar(months: int) -> float:
 
 def get_sysarmy_data() -> pd.DataFrame:
     sysarmy_data = pd.read_csv(
-        CWD_PATH / "data" / "2025_2_sysarmy.csv",
+        CWD_PATH / "data" / "sysarmy" / "2026_1_sysarmy.csv",
         usecols=[
             "dedicacion",
             "ultimo_salario_mensual_o_retiro_neto_en_pesos_argentinos",
@@ -40,7 +41,7 @@ def get_sysarmy_data() -> pd.DataFrame:
     )
     sysarmy_data["ultimo_salario_mensual_o_retiro_neto_en_pesos_argentinos"] = (
         sysarmy_data["ultimo_salario_mensual_o_retiro_neto_en_pesos_argentinos"]
-        * get_inflation_scalar(get_months_since(7))
+        * get_inflation_scalar(get_months_since(1))
     )
     return sysarmy_data
 

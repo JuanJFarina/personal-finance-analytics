@@ -24,6 +24,7 @@ def get_months_until_now():
 
 
 def get_months_since(month: int) -> int:
+    """month is 1-indexed (1 for January, 2 for February, etc.)"""
     current_month = datetime.now().month
     if month > current_month:
         return 12 - month + current_month

@@ -13,13 +13,13 @@ NEXT_YEAR_EXPENSES_SPREADSHEET_ID = Settings.NEXT_YEAR_EXPENSES_SPREADSHEET_ID
 
 
 MAXIMUM_PERCENTAGES_PER_CATEGORY = {
-    "alquileres": 30,
+    "alquileres": 25,
     "servicios_esenciales": 7,
     "servicios_no_esenciales": 5,
-    "hogar": 10,
-    "transporte": 3,
-    "salidas": 5,
-    "shopping": 7,
+    "hogar": 8,
+    "transporte": 2,
+    "salidas": 10,
+    "shopping": 10,
     "otros": 3,
 }
 
